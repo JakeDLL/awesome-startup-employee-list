@@ -1,13 +1,18 @@
 const users = new Promise((resolve, reject) => {
-    const usersJSON = fetch("https://randomuser.me/api/?results=12").then(response => response.json());
-    resolve(usersJSON);
+    fetch("https://randomuser.me/api/?results=12")
+        .then(response => {
+            if (response.ok) {
+                resolve(response.json());
+            } else {
+                reject(console.log(response.statusText));
+            }
+        })
 });
 
 async function createGallery(json) {
     const gallery = document.querySelector('#gallery');
     const users = await json.results;
     users.forEach(user => {
-        console.log(user);
         const card = `
             <div class="card">
                 <div class="card-img-container">
@@ -23,21 +28,29 @@ async function createGallery(json) {
         gallery.insertAdjacentHTML('beforeend', card);
     });
 }
+
+function createModal(element) {
+
+}
+
+// function addEventListeners() {
+//     const profiles = document.querySelectorAll('.card');
+//     profiles.forEach(profile => {
+//         profile.addEventListener('click', event => {
+//             // createModal(event.target);
+//         });
+//     })
+// }
+
 users.then(createGallery);
+// .then(addEventListeners);
 // info to get from api:
-/**
- * gallery:
- * name
- * thumbnail img
- * email
- * city
- * 
- * Modal:
- * Name
- * img
- * email
- * city
- * number
- * address
- * dob
- */
+//  * Modal:
+//  * Name
+//  * img
+//  * email
+//  * city
+//  * number
+//  * address
+//  * dob
+//  */
