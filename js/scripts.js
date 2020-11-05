@@ -1,5 +1,5 @@
 const users = new Promise((resolve, reject) => {
-    fetch("https://randomuser.me/api/?results=1209809-=")
+    fetch("https://randomuser.me/api/?results=12")
         .then(response => {
             if (response.ok) {
                 resolve(response.json());
@@ -57,16 +57,17 @@ function createGallery(json) {
 
 // }
 
-function addEventListeners() {
-    const profiles = document.querySelectorAll('.card');
-    profiles.forEach(profile => {
-        profile.addEventListener('click', event => {
-            console.log(event.target);
-        });
-    })
-}
+// function addEventListeners() {
+//     const profiles = document.querySelectorAll('.card');
+//     profiles.forEach(profile => {
+//         profile.addEventListener('click', event => {
+//             console.log(event.target);
+//         });
+//     })
+// }
 
-users.then(createGallery).then(addEventListeners);
+users.then(createGallery);
+// .then(addEventListeners);
 
 
 
