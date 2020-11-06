@@ -14,7 +14,7 @@ function createGallery(json) {
     const users = json.results;
     users.forEach(user => {
         const card = `
-            <div class="card ${users.indexOf(user)}">
+            <div id="user-${users.indexOf(user)}"class="card">
                 <div class="card-img-container">
                     <img class="card-img" src="${user.picture.large}" alt="profile picture">
                 </div>
@@ -25,6 +25,10 @@ function createGallery(json) {
                 </div>
             </div>
         `;
+        gallery.insertAdjacentHTML('beforeend', card);
+    });
+
+}
 
         // const modal = `
         //     <div class="modal-container" hidden>
@@ -48,26 +52,25 @@ function createGallery(json) {
         //         </div>
         //     </div>
         // `;
-        gallery.insertAdjacentHTML('beforeend', card);
-    });
-
-}
 
 // function createModal(element, data) {
 
 // }
 
-// function addEventListeners() {
-//     const profiles = document.querySelectorAll('.card');
-//     profiles.forEach(profile => {
-//         profile.addEventListener('click', event => {
-//             console.log(event.target);
-//         });
-//     })
-// }
+function addEventListeners() {
+    const profiles = document.querySelectorAll('.card');
+    profiles.forEach(profile => {
+        profile.addEventListener('click', event => {
+            const userID = event.currentTarget.id;
+            setTimeout(() => {
+                console.log(userID);
+            }, 1000);
+        });
+    })
+}
 
-users.then(createGallery);
-// .then(addEventListeners);
+users.then(createGallery)
+.then(addEventListeners);
 
 
 
